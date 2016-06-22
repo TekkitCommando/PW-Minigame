@@ -1,11 +1,11 @@
 package me.tekkitcommando.pw.timer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.tekkitcommando.pw.PirateWars;
 import me.tekkitcommando.pw.handlers.GameHandler;
-import net.md_5.bungee.api.ChatColor;
 
 public class GameTimer extends BukkitRunnable {
 

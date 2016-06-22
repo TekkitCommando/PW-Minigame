@@ -19,6 +19,7 @@ import com.google.common.collect.Lists;
 import com.google.common.math.IntMath;
 
 import me.tekkitcommando.pw.PirateWars;
+import me.tekkitcommando.pw.stages.GameState;
 
 public class GameHandler {
 	
@@ -35,6 +36,26 @@ public class GameHandler {
 		} else {
 			return false;
 		}
+	}
+	
+	public static boolean canJoin() {
+		if(GameState.getCurrentState() == GameState.LOBBY_STATE) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static void addPlayer(Player player) {
+		allPlayers.add(player);
+	}
+	
+	public static void removePlayer(Player player) {
+		allPlayers.remove(player);
+	}
+	
+	public static void tpToLobby(Player player) {
+		player.teleport(new Location(Bukkit.getWorld("lobby"), 1, 1, 1));
 	}
 
 	public static void startGame() {

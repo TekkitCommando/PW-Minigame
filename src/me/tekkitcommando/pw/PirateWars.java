@@ -7,8 +7,13 @@
 package me.tekkitcommando.pw;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.tekkitcommando.pw.commands.PWCommand;
+import me.tekkitcommando.pw.listeners.JoinListener;
+import me.tekkitcommando.pw.listeners.LeaveListener;
+import me.tekkitcommando.pw.stages.GameState;
 import me.tekkitcommando.pw.timer.GameTimer;
 
 public class PirateWars extends JavaPlugin {
@@ -20,10 +25,28 @@ public class PirateWars extends JavaPlugin {
 		Bukkit.getServer().getLogger().info("Starting game timer...");
 		startGameTimer();
 		Bukkit.getServer().getLogger().info("Game timer started!");
+		GameState.setState(GameState.LOBBY_STATE);
+		Bukkit.getServer().getLogger().info("Set GameState to Lobby State");
+		Bukkit.getServer().getLogger().info("Registering commands...");
+		initCommands();
+		Bukkit.getServer().getLogger().info("Commands registered!");
+		Bukkit.getServer().getLogger().info("Registering event handlers...");
+		registerEvents();
+		Bukkit.getServer().getLogger().info("Event handlers registered!");
 	}
 	
 	public void onDisable() {
 		
+	}
+	
+	public void initCommands() {
+		getCommand("pw").setExecutor(new PWCommand());
+	}
+	
+	public void registerEvents() {
+		PluginManager pm = Bukkit.getServer().getPluginManager();
+		pm.registerEvents(new JoinListener(), this);
+		pm.registerEvents(new LeaveListener(), this);
 	}
 	
     @SuppressWarnings("deprecation")
