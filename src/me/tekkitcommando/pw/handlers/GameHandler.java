@@ -8,6 +8,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -52,13 +55,34 @@ public class GameHandler {
 	public static void createScoreboard() {
 		ScoreboardManager manager = Bukkit.getScoreboardManager();
 		Scoreboard board = manager.getNewScoreboard();
+		
 		red = board.registerNewTeam("red");
 		blue = board.registerNewTeam("blue");
+		
+		red.setPrefix(ChatColor.RED + "[Red]");
+		blue.setPrefix(ChatColor.BLUE + "[Blue");
+		
+		red.setDisplayName("Red");
+		blue.setDisplayName("Blue");
+		
+		red.setAllowFriendlyFire(false);
+		blue.setAllowFriendlyFire(false);
+		
+		Objective objective = board.registerNewObjective("kills", "playerKillCount");
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		objective.setDisplayName(ChatColor.GREEN + "Kill Count");
+		
 		for(Player player : partitions.get(1)) {
 			red.addEntry(player.getName());
+			player.setScoreboard(board);
+			Score score = objective.getScore(player.getName());
+			score.setScore(0);
 		}
 		for(Player player : partitions.get(2)) {
 			blue.addEntry(player.getName());
+			player.setScoreboard(board);
+			Score score = objective.getScore(player.getName());
+			score.setScore(0);
 		}
 	}
 }
