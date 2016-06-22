@@ -17,7 +17,9 @@ public class PirateWars extends JavaPlugin {
 	public static PirateWars instance;
 	
 	public void onEnable() {
+		Bukkit.getServer().getLogger().info("Starting game timer...");
 		startGameTimer();
+		Bukkit.getServer().getLogger().info("Game timer started!");
 	}
 	
 	public void onDisable() {

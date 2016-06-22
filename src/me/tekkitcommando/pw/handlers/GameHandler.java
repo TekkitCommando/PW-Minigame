@@ -36,7 +36,6 @@ public class GameHandler {
 
 	public static void startGame() {
 		for(Player player : allPlayers) {
-			createScoreboard();
 			if(red.hasEntry(player.getName())) {
 				player.teleport(new Location(Bukkit.getWorld("game"), 1, 1, 1));
 				player.sendMessage(ChatColor.GREEN + "You have been teleported to the " + ChatColor.DARK_RED + "RED" 
@@ -47,6 +46,7 @@ public class GameHandler {
 						+ ChatColor.GREEN + " team spawn.");
 			}
 		}
+		createScoreboard();
 	}
 	
 	public static void createScoreboard() {
