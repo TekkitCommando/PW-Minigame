@@ -1,3 +1,9 @@
+/**
+ * When I push to Github sometimes it is an ass
+ * and says invalid-email-address as my username
+ * so just know that that account is me as well.
+ */
+
 package me.tekkitcommando.pw;
 
 import org.bukkit.Bukkit;
